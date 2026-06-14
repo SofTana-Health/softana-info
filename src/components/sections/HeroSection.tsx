@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Typography } from "../atoms/Typography";
+import { Typography } from "../ui/Typography";
 import { ArrowRight, CloudOff, CheckCircle2, ShieldCheck, Activity, ShieldPlus, Stethoscope, Pill } from "lucide-react";
 import Image from "next/image";
+
+import { Button } from "../ui/Button";
 
 export function HeroSection() {
   return (
@@ -34,16 +36,16 @@ export function HeroSection() {
             </h1>
 
             {/* Subheadline */}
-            <Typography variant="lead" className="mb-10 text-gray-500 text-lg md:text-xl leading-relaxed font-medium">
+            <Typography variant="lead" className="mb-10 text-muted-foreground text-lg md:text-xl leading-relaxed font-medium">
               El sistema de inventario y caja que <strong className="text-gray-900 font-semibold">no depende de internet</strong>. Si la red falla, tú sigues despachando sin interrupciones.
             </Typography>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <button className="group flex items-center justify-center gap-3 bg-primary text-white rounded-xl px-8 py-4 text-base font-bold shadow-lg shadow-primary/25 hover:bg-secondary hover:shadow-secondary/25 transition-all duration-300">
+              <Button size="lg" className="group gap-3 rounded-2xl">
                 <span>Agendar demostración</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Button>
             </div>
             
             {/* Trust Anchor / Social Proof */}

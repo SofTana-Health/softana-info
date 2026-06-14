@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Typography } from "../atoms/Typography";
+import { Typography } from "../ui/Typography";
 import { WifiOff, Database, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import { Card, CardContent } from "../ui/Card";
 
 interface BentoCardProps {
   title: string;
@@ -13,26 +15,26 @@ interface BentoCardProps {
 
 function BentoCard({ title, description, icon: Icon, className, span = "1" }: BentoCardProps) {
   return (
-    <div className={cn(
-      "p-1.5 rounded-[2rem] bg-gray-50/50 border border-gray-200/50 transition-haptic hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]",
+    <Card className={cn(
+      "p-1",
       span === "2" && "md:col-span-2",
       span === "3" && "md:col-span-3",
       className
     )}>
-      <div className="w-full h-full bg-white rounded-[calc(2rem-0.375rem)] shadow-[inset_0_1px_1px_rgba(0,0,0,0.02)] border border-gray-50 p-8 flex flex-col justify-between group">
+      <CardContent className="p-8 h-full flex flex-col justify-between group">
         <div>
-          <div className="w-12 h-12 rounded-full bg-soft/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-haptic">
-            <Icon strokeWidth={1.5} className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-soft/10 flex items-center justify-center mb-8 text-primary group-hover:bg-primary group-hover:text-white transition-haptic shadow-sm">
+            <Icon strokeWidth={1.5} className="w-7 h-7" />
           </div>
-          <Typography variant="h3" className="mb-3 text-gray-900 tracking-tight">
+          <Typography variant="h3" className="mb-4 tracking-tight">
             {title}
           </Typography>
-          <Typography variant="p" className="text-gray-500 mt-0 leading-relaxed text-base">
+          <Typography variant="p" className="text-muted-foreground mt-0 leading-relaxed text-base">
             {description}
           </Typography>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 

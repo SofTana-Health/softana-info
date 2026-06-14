@@ -1,8 +1,10 @@
 import * as React from "react";
-import { Typography } from "../atoms/Typography";
-import { Button } from "../atoms/Button";
+import { Typography } from "../ui/Typography";
+import { Button } from "../ui/Button";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/Card";
 
 interface PricingPlanProps {
   name: string;
@@ -16,49 +18,58 @@ interface PricingPlanProps {
 
 function PricingCard({ name, price, description, features, isPopular, buttonText, buttonVariant = "outline" }: PricingPlanProps) {
   return (
-    <div className={cn(
-      "relative flex flex-col p-8 rounded-[2rem] border bg-white transition-haptic hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]",
-      isPopular ? "border-primary shadow-md scale-105 z-10" : "border-gray-200"
+    <Card className={cn(
+      "relative flex flex-col h-full",
+      isPopular ? "border-primary shadow-haptic-hover scale-105 z-10" : "border-gray-200"
     )}>
       {isPopular && (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <span className="bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
+          <span className="bg-gradient-to-r from-primary to-secondary text-white text-xs font-black uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
             Más Popular
           </span>
         </div>
       )}
       
-      <div className="mb-6">
+      <CardHeader className="p-8 pb-0">
         <Typography variant="h3" className={cn("mb-2", isPopular ? "text-primary" : "text-gray-900")}>
           {name}
         </Typography>
-        <Typography variant="p" className="text-gray-500 mt-0 text-sm h-10">
+        <Typography variant="p" className="text-muted-foreground mt-0 text-sm h-10 leading-snug">
           {description}
         </Typography>
-      </div>
+      </CardHeader>
 
-      <div className="mb-8 flex items-baseline gap-1">
-        <Typography variant="h1" className="text-gray-900 mb-0">
-          {price}
-        </Typography>
-        <Typography variant="p" className="text-gray-500 mt-0 font-medium">
-          /mes
-        </Typography>
-      </div>
+      <CardContent className="p-8">
+        <div className="mb-8 flex items-baseline gap-1">
+          <Typography variant="h1" className="text-gray-900 mb-0 text-5xl">
+            {price}
+          </Typography>
+          <Typography variant="p" className="text-muted-foreground mt-0 font-bold">
+            /mes
+          </Typography>
+        </div>
 
-      <ul className="flex flex-col gap-4 mb-8 flex-1">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-3">
-            <Check className={cn("w-5 h-5 shrink-0", isPopular ? "text-secondary" : "text-gray-400")} />
-            <span className="text-gray-600 text-sm leading-tight">{feature}</span>
-          </li>
-        ))}
-      </ul>
+        <ul className="flex flex-col gap-4 mb-0 flex-1">
+          {features.map((feature, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <div className={cn(
+                "mt-0.5 rounded-full p-0.5",
+                isPopular ? "bg-secondary/10 text-secondary" : "bg-gray-100 text-gray-400"
+              )}>
+                <Check className="w-3.5 h-3.5" strokeWidth={3} />
+              </div>
+              <span className="text-gray-600 text-sm font-medium leading-tight">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
 
-      <Button variant={buttonVariant} className="w-full rounded-xl py-6 font-semibold" size="lg">
-        {buttonText}
-      </Button>
-    </div>
+      <CardFooter className="p-8 pt-0">
+        <Button variant={buttonVariant} className="w-full" size="lg">
+          {buttonText}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
 

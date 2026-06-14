@@ -1,8 +1,8 @@
-import { Navbar } from "@/components/organisms/Navbar";
-import { HeroSection } from "@/components/organisms/HeroSection";
-import { FeaturesSection } from "@/components/organisms/FeaturesSection";
-import { PricingSection } from "@/components/organisms/PricingSection";
-import { Footer } from "@/components/organisms/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { PricingSection } from "@/components/sections/PricingSection";
+import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (

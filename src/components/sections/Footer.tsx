@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import { Typography } from "../atoms/Typography";
+import { Typography } from "../ui/Typography";
 import { ArrowRight } from "lucide-react";
 
 export function Footer() {

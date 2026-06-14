@@ -30,8 +30,10 @@ export interface TypographyProps
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, as, ...props }, ref) => {
     // Determine the default tag based on the variant
-    const defaultTag = variant?.startsWith("h") ? variant : "p";
-    const Tag = as || defaultTag || "p";
+    const defaultTag = variant && ["h1", "h2", "h3", "h4"].includes(variant)
+      ? (variant as React.ElementType)
+      : "p";
+    const Tag = as || defaultTag;
 
     return (
       <Tag
