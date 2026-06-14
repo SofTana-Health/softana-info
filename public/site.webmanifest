@@ -1,0 +1,17 @@
+{
+  "name": "SofTana",
+  "short_name": "SofTana",
+  "description": "El sistema de gestión y POS para farmacias líder en tecnología offline.",
+  "icons": [
+    {
+      "src": "/logo-cuadrado.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#27187E",
+  "background_color": "#030712",
+  "display": "standalone",
+  "start_url": "/"
+}

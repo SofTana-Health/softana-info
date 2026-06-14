@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { siteConfig } from "@/config/site-config";
+import { JsonLd } from "@/components/ui/JsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +21,51 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "SofTana | Control total para boticas y farmacias",
-  description: "El primer sistema de inventario y gestión diseñado para las farmacias independientes de Huancayo. Operación Offline-First para vender sin interrupciones.",
+  title: {
+    default: `${siteConfig.name} | Sistema de Gestión para Farmacias`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: siteConfig.authors,
+  creator: "Sudolabs",
+  metadataBase: new URL(siteConfig.url),
+  openGraph: {
+    type: "website",
+    locale: "es_PE",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "/logo-cuadrado.svg",
+        width: 1080,
+        height: 1080,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ["/logo-cuadrado.svg"],
+    creator: "@sudolabs",
+  },
+  icons: {
+    icon: "/logo-cuadrado.svg",
+    shortcut: "/logo-cuadrado.svg",
+    apple: "/logo-cuadrado.svg",
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
+};
+
+export const viewport: Viewport = {
+  themeColor: "#27187E",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -33,6 +78,7 @@ export default function RootLayout({
       <body
         className={`${plusJakarta.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <JsonLd />
         {children}
       </body>
     </html>
