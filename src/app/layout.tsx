@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site-config";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,10 +41,10 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/logo-cuadrado.svg",
-        width: 1080,
-        height: 1080,
-        alt: siteConfig.name,
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - Sistema para Farmacias`,
       },
     ],
   },
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/logo-cuadrado.svg"],
+    images: ["/og-image.jpg"],
     creator: "@sudolabs",
   },
   icons: {
@@ -80,6 +82,8 @@ export default function RootLayout({
       >
         <JsonLd />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

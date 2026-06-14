@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "SofTana",
   description: "El sistema de gestión y POS para farmacias líder en tecnología offline. Control total de inventario, ventas y 30,000+ SKUs médicos sin depender de internet.",
   url: "https://softana.info",
-  ogImage: "https://softana.info/logo-cuadrado.svg", // Usando el logo principal 1080x1080 como pediste
+  ogImage: "https://softana.info/og-image.jpg", // Recomendado: PNG o JPG de 1200x630px (SVG no es soportado por WhatsApp/FB)
   links: {
     twitter: "https://x.com/softana",
     facebook: "https://facebook.com/softana",
