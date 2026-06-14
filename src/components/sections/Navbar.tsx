@@ -36,40 +36,52 @@ export function Navbar() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-300 ${
-        isScrolled ? "bg-white/80 backdrop-blur-2xl border-b border-gray-200/50 shadow-sm" : "bg-transparent border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ${
+        isScrolled 
+          ? "bg-gray-950/40 backdrop-blur-xl border-b border-white/10 shadow-2xl" 
+          : "bg-transparent border-transparent"
       }`}
     >
-      <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-8">
+      <div className="container mx-auto flex h-20 md:h-24 items-center justify-between px-6 md:px-12">
         
         <div className="flex items-center gap-3">
-          <a href="#" className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
-            <div className="relative w-8 h-8 md:w-10 md:h-10 group-hover:scale-105 transition-transform duration-300">
+          <a href="#" className="flex items-center gap-4 hover:opacity-90 transition-opacity group">
+            {/* Isotipo (Icono) - Original Colors */}
+            <div className="relative w-10 h-10 md:w-12 md:h-12 group-hover:scale-105 transition-transform duration-500">
               <Image 
                 src="/logo-cuadrado.svg" 
-                alt="SofTana Isotipo" 
+                alt="SofTana Icon" 
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <Typography variant="h4" className="mb-0 text-primary tracking-tight font-bold hidden sm:block">
-              SofTana
-            </Typography>
+            {/* Logotipo (Letras) - White filter */}
+            <div className="relative w-32 h-8 md:w-40 md:h-10 hidden sm:block">
+              <Image 
+                src="/logo-letras.svg" 
+                alt="SofTana" 
+                fill
+                className="object-contain brightness-0 invert"
+                priority
+              />
+            </div>
           </a>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          <a href="#features" className="text-sm font-semibold text-gray-500 hover:text-primary transition-colors">
+        <nav className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+          <a href="#features" className="text-xs font-black text-white/60 hover:text-white uppercase tracking-[0.3em] transition-colors">
             El Sistema
           </a>
-          <a href="#pricing" className="text-sm font-semibold text-gray-500 hover:text-primary transition-colors">
+          <a href="#pricing" className="text-xs font-black text-white/60 hover:text-white uppercase tracking-[0.3em] transition-colors">
             Planes
           </a>
         </nav>
 
         <div className="flex items-center">
-          <Button variant="default" className="rounded-full px-5 py-2 md:px-7 md:py-2.5 h-auto text-xs md:text-sm font-bold shadow-[0_4px_14px_rgba(39,24,126,0.15)] hover:shadow-[0_6px_20px_rgba(39,24,126,0.25)] active:scale-[0.98] transition-haptic">
+          <Button 
+            className="rounded-full px-8 py-3 h-auto text-xs font-black uppercase tracking-[0.15em] bg-white text-primary border-2 border-white hover:bg-primary hover:text-white hover:border-primary shadow-[0_10px_30px_-5px_rgba(255,255,255,0.2)] transition-all duration-500"
+          >
             Agendar Demo
           </Button>
         </div>
