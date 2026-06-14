@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Typography } from "../ui/Typography";
 import { WifiOff, Database, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import Image from "next/image";
 import { Card, CardContent } from "../ui/Card";
 
 interface BentoCardProps {
@@ -10,28 +9,37 @@ interface BentoCardProps {
   description: string;
   icon: React.ElementType;
   className?: string;
-  span?: "1" | "2" | "3";
+  span?: "1" | "2" | "3" | "full";
+  bgImage?: string;
 }
 
-function BentoCard({ title, description, icon: Icon, className, span = "1" }: BentoCardProps) {
+function BentoCard({ title, description, icon: Icon, className, span = "1", bgImage }: BentoCardProps) {
   return (
     <Card className={cn(
-      "p-1",
+      "relative group overflow-hidden border-white/10 bg-gray-900/40 backdrop-blur-md transition-haptic",
       span === "2" && "md:col-span-2",
       span === "3" && "md:col-span-3",
+      span === "full" && "md:col-span-full",
       className
     )}>
-      <CardContent className="p-8 h-full flex flex-col justify-between group">
-        <div>
-          <div className="w-14 h-14 rounded-2xl bg-soft/10 flex items-center justify-center mb-8 text-primary group-hover:bg-primary group-hover:text-white transition-haptic shadow-sm">
-            <Icon strokeWidth={1.5} className="w-7 h-7" />
+      {bgImage && (
+        <div className="absolute inset-0 z-0">
+          <Image src={bgImage} alt={title} fill className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
+        </div>
+      )}
+      
+      <CardContent className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[280px]">
+        <div className="flex flex-col items-start gap-4">
+          <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white border border-white/10 group-hover:bg-primary group-hover:scale-110 transition-haptic shadow-xl">
+            <Icon strokeWidth={1.5} className="w-6 h-6" />
           </div>
-          <Typography variant="h3" className="mb-4 tracking-tight">
+          <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter uppercase leading-none mt-2">
             {title}
-          </Typography>
-          <Typography variant="p" className="text-muted-foreground mt-0 leading-relaxed text-base">
+          </h3>
+          <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl">
             {description}
-          </Typography>
+          </p>
         </div>
       </CardContent>
     </Card>
@@ -40,41 +48,45 @@ function BentoCard({ title, description, icon: Icon, className, span = "1" }: Be
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="w-full bg-white py-32 md:py-40">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="features" className="w-full bg-gray-950 py-20 md:py-24 border-t border-white/5">
+      <div className="container mx-auto px-6 md:px-12">
         
-        <div className="flex flex-col mb-20 max-w-3xl">
-          <Typography variant="h2" className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-            La botica no para. <br/> El sistema tampoco.
-          </Typography>
-          <Typography variant="lead" className="text-gray-500 text-lg md:text-xl">
-            Arquitectura moderna pensada para resolver los cuellos de botella reales de la atención farmacéutica en la región.
-          </Typography>
+        {/* Narrative Header - Compact */}
+        <div className="flex flex-col mb-10 max-w-4xl">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-4 leading-none uppercase">
+            DE LA TRINCHERA <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-soft via-white to-soft bg-[size:200%] animate-gradient">
+              AL CENTRO DE MANDO
+            </span>
+          </h2>
         </div>
 
-        {/* Asymmetrical Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
+        {/* Compact Narrative Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           
+          {/* Card 1: The Resistance (Immersive) */}
           <BentoCard 
-            span="2"
+            span="full"
+            bgImage="/images/Eficiencia Operativa en el Almacén 1920x1080.webp"
             icon={WifiOff}
-            title="Arquitectura Offline-First"
-            description="Las caídas de red ya no significan dejar de vender. El punto de venta almacena tus transacciones de forma segura en tu equipo local y las sincroniza con la nube silenciosamente en cuanto la conexión se estabiliza."
+            title="Soberanía Offline"
+            description="Cuando el mundo digital cae, tu botica resiste. Arquitectura local redundante que procesa ventas y protege tu inventario sin necesidad de un solo bit de internet. La sincronización es silenciosa; el control es absoluto."
           />
           
+          {/* Card 2: The Flow */}
           <BentoCard 
             span="1"
             icon={Layers}
-            title="Interfaz Sin Fricción"
-            description="Construido para velocidad. Diseño minimalista que requiere cero horas de capacitación para que tu personal comience a despachar."
+            title="Fricción Cero"
+            description="Construido para la velocidad del despacho real. Una interfaz táctil optimizada para que tu personal venda más rápido de lo que el cliente parpadea."
           />
 
+          {/* Card 3: The Genome */}
           <BentoCard 
-            span="3"
+            span="2"
             icon={Database}
-            title="Catálogo Estandarizado Integrado"
-            description="Una de las mayores barreras al cambiar de sistema es ingresar productos. SoftAna incluye un catálogo precargado y estandarizado con miles de medicamentos listos para vender. Activa tu cuenta e inicia operaciones el mismo día."
-            className="md:h-[350px]"
+            title="ADN Maestro"
+            description="Olvida la carga manual. Accede a un catálogo estandarizado con más de 30,000 SKUs médicos precargados. Empieza a vender hoy con la inteligencia de datos de los laboratorios líderes ya integrada."
           />
 
         </div>
